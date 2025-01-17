@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div>
+    <h1 class="text-center mt-5 fw-bold">CRUD SYSTEM</h1>
+</div>    
+<div class="inputsdiv container w-75 mt-5">
+    <form>
+      <div class="mb-4">
+        <label class="mb-2 fw-semibold" for="productName"> product name </label>
+        <input type="text" class="form-control" id="productName" >
+      </div>
+      <div class="mb-4">
+        <label class="mb-2 fw-semibold" for="productPrice"> product price </label>
+        <input type="text" class="form-control" id="productPrice" >
+      </div>
+      <div class="mb-4">
+        <label class="mb-2 fw-semibold" for="productImage"> product price </label>
+        <input type="file" class="form-control" id="productImage" >
+      </div>
+      <div class="mb-3">
+        <label for="productCategory" class="mb-1">Product Category</label>
+        <select class="form-select" id="productCategory">
+          <option value="tv">Tv</option>
+          <option value="mobile">Mobile</option>
+          <option value="labtop">Labtop</option>
+        </select>
+      </div>
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" role="switch" id="productStock">
+        <label class="form-check-label" for="productStock"> on stock</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" placeholder="Leave a comment here" id="productDiscription" style="height: 100px"></textarea>
+        <label for="productDiscription">Discription</label>
+      </div>
+      <button id="updateptn" onclick=" updateproduct ()" type="button" class="btn btn1 me-2 d-none">Update product</button>
+      <button id="addptn" onclick=" AddProduct ()" type="button" class="btn btn2 me-2">Add  Product</button>
+      <button type="button" class="btn btn3">clear</button>
+
+    </form>
+    <input
+    oninput="searchproduct ()"
+    type="text"
+    class="form-control w-50 mx-auto my-5"
+    placeholder="search"
+    name=""
+    id="searchInput"
+  />
+
+</div>
+<div class=" row container m-auto g-2" id="myRow">
+
+</div>
+
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

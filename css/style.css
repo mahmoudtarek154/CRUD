@@ -1,0 +1,75 @@
+@font-face {
+    font-family: cairo;
+    src: url(../fonts/Cairo-VariableFont_slnt\,wght.ttf);
+}
+body{
+    background-color: #e0e0e0;
+    font-family: cairo;
+
+}
+h1{
+    font-family: cairo;
+    font-size: 50px;
+    position: relative;
+}
+h1::after{
+    content: "";
+    position: absolute;
+    width: 10%;
+    height: 4px;
+    background-color: #a2c11c;
+    top: 130%;
+    left: 50%;
+    transform: translate(-50%);
+    border-radius: 20px;
+}
+.btn1{
+    outline: #a2c11c solid 3px;
+    color: #1a393d;
+    
+}
+.btn2{
+    outline: #a2c11c solid 3px;
+    background-color:#a2c11c ;
+    color: #152c2f;
+}
+.btn3{
+    outline: #2c5d63 solid 3px;
+    background-color:#2c5d63 ;
+    color: white;
+}
+.btn4{
+    outline: #a2c11c solid 3px;
+    background-color:#a2c11c ;
+    color: white;
+}
+.btn5{
+    outline: #c13131 solid 3px;
+    background-color:#c13131 ;
+    color: white;
+}
+
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    border-color: #86b7fe; 
+    outline: 0;
+     box-shadow: 0 0 0 .25rem #a2c11c ;
+}
+.form-select:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem #a2c11c ;
+
+}
+.productdiv{
+    background-color:#349eae;
+    border: 1px solid #349eae;
+    border-radius: 5px;
+}
+.productdiv img{
+    border-radius: 5px;
+    object-fit: cover;
+    height: 200px;
+
+}
