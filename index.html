@@ -3,67 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Track Lab - Laboratory Management System">
+    <title>Track Lab</title>
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Add favicon -->
+    <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 <body>
-<div>
-    <h1 class="text-center mt-5 fw-bold">CRUD SYSTEM</h1>
-</div>    
-<div class="inputsdiv container w-75 mt-5">
-    <form>
-      <div class="mb-4">
-        <label class="mb-2 fw-semibold" for="productName"> product name </label>
-        <input type="text" class="form-control" id="productName" >
-      </div>
-      <div class="mb-4">
-        <label class="mb-2 fw-semibold" for="productPrice"> product price </label>
-        <input type="text" class="form-control" id="productPrice" >
-      </div>
-      <div class="mb-4">
-        <label class="mb-2 fw-semibold" for="productImage"> product price </label>
-        <input type="file" class="form-control" id="productImage" >
-      </div>
-      <div class="mb-3">
-        <label for="productCategory" class="mb-1">Product Category</label>
-        <select class="form-select" id="productCategory">
-          <option value="tv">Tv</option>
-          <option value="mobile">Mobile</option>
-          <option value="labtop">Labtop</option>
-        </select>
-      </div>
-      <div class="form-check form-switch mb-3">
-        <input class="form-check-input" type="checkbox" role="switch" id="productStock">
-        <label class="form-check-label" for="productStock"> on stock</label>
-      </div>
-      <div class="form-floating mb-3">
-        <textarea class="form-control" placeholder="Leave a comment here" id="productDiscription" style="height: 100px"></textarea>
-        <label for="productDiscription">Discription</label>
-      </div>
-      <button id="updateptn" onclick=" updateproduct ()" type="button" class="btn btn1 me-2 d-none">Update product</button>
-      <button id="addptn" onclick=" AddProduct ()" type="button" class="btn btn2 me-2">Add  Product</button>
-      <button type="button" class="btn btn3">clear</button>
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
 
-    </form>
-    <input
-    oninput="searchproduct ()"
-    type="text"
-    class="form-control w-50 mx-auto my-5"
-    placeholder="search"
-    name=""
-    id="searchInput"
-  />
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header class="text-center mt-5">
+            <h1 class="fw-bold animate__animated animate__fadeInDown">
+                <i class="fas fa-flask me-2"></i>TRACK LAB
+            </h1>
+            <p class="text-muted animate__animated animate__fadeIn">Modern Laboratory Management System</p>
+        </header>
 
-</div>
-<div class=" row container m-auto g-2" id="myRow">
+        <!-- Main Form Section -->
+        <div class="inputsdiv container w-75 mt-5 animate__animated animate__fadeIn">
+            <form id="labForm" class="needs-validation" novalidate>
+                <!-- Patient Information -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-user me-2"></i>Patient Information</h3>
+                    <div class="mb-4">
+                        <label class="mb-2 fw-semibold" for="patientName">Patient Name</label>
+                        <input type="text" class="form-control input-animation" id="patientName" 
+                               placeholder="Enter patient name" required>
+                        <div class="invalid-feedback">Please enter patient name</div>
+                    </div>
+                </div>
 
-</div>
+                <!-- Doctor Selection -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-user-md me-2"></i>Doctor Information</h3>
+                    <div class="mb-4">
+                        <label class="mb-2 fw-semibold" for="productName">Doctor Name</label>
+                        <select class="form-select input-animation" id="productName" required>
+                            <option value="" disabled selected>Select Doctor</option>
+                            <option value="doctor1">Dr. Mohamed gamal adam</option>
+                            <option value="doctor2">Dr. Hany Algelany</option>
+                            <option value="doctor3">Dr. Asmaa Albraee</option>
+                            <option value="doctor4">Dr. khaled Mahran</option>
+                            <option value="doctor5">Dr. Islam Hassan Abo Shama</option>
+                            <option value="doctor6">Dr. Mahmoud Atia Almekkawy</option>
+                            <option value="doctor7">Dr. Emad Abd Elal sleem</option>
+                            <option value="doctor8">Dr. Ahmed Hassan</option>
+                            <option value="doctor9">Dr. Islam Hassan Mohammed</option>
+                            <option value="doctor10">Dr. Youssef Adel</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a doctor</div>
+                    </div>
+                </div>
 
+                <!-- Test Selection -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-vial me-2"></i>Laboratory Tests</h3>
+                    <div class="mb-4">
+                        <label class="mb-2 fw-semibold" for="selectedTests">Select Tests</label>
+                        <select class="form-select input-animation" id="selectedTests" multiple="multiple" required>
+                            <!-- Blood Tests -->
+                            <optgroup label="Blood Tests">
+                                <option value="cbc">Complete Blood Count (CBC)</option>
+                                <option value="liver">Liver Function Tests</option>
+                                <option value="kidney">Kidney Function Tests</option>
+                                <option value="thyroid">Thyroid Function Tests</option>
+                                <option value="diabetes">Diabetes Tests (HbA1c)</option>
+                                <option value="cholesterol">Lipid Profile</option>
+                                <option value="ferritin">Ferritin Test</option>
+                                <option value="vitamin_d">Vitamin D Test</option>
+                            </optgroup>
+                            
+                            <!-- Viral Tests -->
+                            <optgroup label="Viral Tests">
+                                <option value="hcv">HCV Antibody</option>
+                                <option value="hbv">HBV Surface Antigen</option>
+                                <option value="covid">COVID-19 PCR</option>
+                            </optgroup>
+                            
+                            <!-- Hormonal Tests -->
+                            <optgroup label="Hormonal Tests">
+                                <option value="testosterone">Testosterone</option>
+                                <option value="fsh">FSH</option>
+                                <option value="lh">LH</option>
+                                <option value="prolactin">Prolactin</option>
+                            </optgroup>
+                            
+                            <!-- Imaging Tests -->
+                            <optgroup label="Imaging">
+                                <option value="xray">X-Ray</option>
+                                <option value="ultrasound">Ultrasound</option>
+                                <option value="ct">CT Scan</option>
+                                <option value="mri">MRI</option>
+                            </optgroup>
+                        </select>
+                        <div class="invalid-feedback">Please select at least one test</div>
+                    </div>
+                </div>
 
+                <!-- Price Information -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-money-bill-wave me-2"></i>Price Information</h3>
+                    <div class="mb-4">
+                        <label class="mb-2 fw-semibold" for="productPrice">Total Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text">EGP</span>
+                            <input type="number" class="form-control input-animation" id="productPrice" required min="0">
+                            <div class="invalid-feedback">Please enter a valid price</div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Date Selection -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-calendar me-2"></i>Date Information</h3>
+                    <div class="mb-4">
+                        <label class="mb-2 fw-semibold">Date</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <select class="form-select input-animation mb-2 mb-md-0" id="productType" required>
+                                    <option value="" disabled selected>Select Month</option>
+                                    <option value="january">January</option>
+                                    <option value="february">February</option>
+                                    <option value="march">March</option>
+                                    <option value="april">April</option>
+                                    <option value="may">May</option>
+                                    <option value="june">June</option>
+                                    <option value="july">July</option>
+                                    <option value="august">August</option>
+                                    <option value="september">September</option>
+                                    <option value="october">October</option>
+                                    <option value="november">November</option>
+                                    <option value="december">December</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a month</div>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-select input-animation" id="productYear" required>
+                                    <option value="" disabled selected>Select Year</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a year</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Notes -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-notes-medical me-2"></i>Additional Information</h3>
+                    <div class="form-floating mb-4">
+                        <textarea class="form-control input-animation" placeholder="Leave a comment here" 
+                                  id="productDiscription" style="height: 100px"></textarea>
+                        <label for="productDiscription">Additional Notes</label>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button id="updateptn" onclick="updateproduct()" type="button" class="btn btn1 d-none">
+                        <i class="fas fa-edit"></i>Update Tests
+                    </button>
+                    <button id="addptn" onclick="AddProduct()" type="button" class="btn btn2">
+                        <i class="fas fa-plus-circle"></i>Add Tests
+                    </button>
+                    <button type="reset" class="btn btn3">
+                        <i class="fas fa-eraser"></i>Clear
+                    </button>
+                </div>
+            </form>
+
+            <!-- Search Section -->
+            <div class="search-container my-5 animate__animated animate__fadeIn">
+                <h3 class="section-title mb-4"><i class="fas fa-search me-2"></i>Search Records</h3>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" class="form-control input-animation" 
+                                   placeholder="Search by doctor or patient" id="searchInput"
+                                   oninput="searchproduct()">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-calendar-month"></i></span>
+                            <select class="form-select input-animation" id="searchMonth" onchange="searchByDate()">
+                                <option value="">All Months</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-calendar-year"></i></span>
+                            <select class="form-select input-animation" id="searchYear" onchange="searchByDate()">
+                                <option value="">All Years</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Records Display -->
+        <div class="row container m-auto g-2" id="myRow">
+            <!-- Records will be dynamically inserted here -->
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="statistics-section container w-75 my-5 py-5 animate__animated animate__fadeIn">
+            <h2><i class="fas fa-chart-line me-2"></i>Financial Summary</h2>
+            <div class="row justify-content-center mb-4">
+                <!-- Total Revenue Card -->
+                <div class="col-md-6 mb-4">
+                    <div class="total-revenue">
+                        <h3><i class="fas fa-money-bill-wave me-2"></i>Total Revenue</h3>
+                        <p id="totalRevenue">EGP 0</p>
+                    </div>
+                </div>
+                
+                <!-- Active Doctors Card -->
+                <div class="col-md-6 mb-4">
+                    <div class="active-doctors">
+                        <h3><i class="fas fa-user-md me-2"></i>Active Doctors</h3>
+                        <p id="activeDoctors">0 doctors</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Breakdown -->
+            <div class="monthly-breakdown mt-5">
+                <h3 class="text-center mb-4">
+                    <i class="fas fa-calendar-alt me-2"></i>Monthly Breakdown
+                </h3>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Total Revenue</th>
+                                <th>Number of Tests</th>
+                                <th>Average per Test</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monthlyBreakdownBody">
+                            <!-- Monthly breakdown data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Total Display -->
+        <div class="floating-total">
+            <i class="fas fa-money-bill-wave"></i>
+            <span id="floatingTotal">EGP 0</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>
